@@ -161,8 +161,15 @@ function isDateInPeriod(date, period) {
  * '1999-01-05T02:20:00.000Z' => '1/5/1999, 2:20:00 AM'
  * '2010-12-15T22:59:00.000Z' => '12/15/2010, 10:59:00 PM'
  */
-function formatDate(/* date */) {
-  throw new Error('Not implemented');
+function formatDate(date) {
+  const [year, month, day, hour, min, sec] = date.split(/\D/);
+  const midday = hour >= 12 ? 'PM' : 'AM';
+  let hrs;
+  if (hour > 12) {
+    hrs = hour - 12;
+  } else hrs = hour;
+  const formattedDate = `${+month}/${+day}/${year}, ${+hrs}:${min}:${sec} ${midday}`;
+  return formattedDate;
 }
 
 /**
